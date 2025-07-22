@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Domain", "BoundedContexts\Auth\Auth.Domain\Auth.Domain.csproj", "{FE76B5BF-C5A8-45A1-AE3F-290BA37E20A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Infrastructure", "BoundedContexts\Auth\Auth.Infrastructure\Auth.Infrastructure.csproj", "{EE9C19FB-6889-4B52-B03F-0E0349D00161}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{146B75D7-33D7-40EF-87B7-D48F3E7B1D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.MongoInfrastructure", "Shared\Shared.MongoInfrastructure\Shared.MongoInfrastructure.csproj", "{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,10 @@ Global
 		{EE9C19FB-6889-4B52-B03F-0E0349D00161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE9C19FB-6889-4B52-B03F-0E0349D00161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE9C19FB-6889-4B52-B03F-0E0349D00161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +64,7 @@ Global
 		{875D4D70-C985-4B98-BECB-8EF357EA6212} = {7FA03437-D720-4AD4-A1C8-947BA8F11E06}
 		{FE76B5BF-C5A8-45A1-AE3F-290BA37E20A7} = {7FA03437-D720-4AD4-A1C8-947BA8F11E06}
 		{EE9C19FB-6889-4B52-B03F-0E0349D00161} = {7FA03437-D720-4AD4-A1C8-947BA8F11E06}
+		{BAFAD40B-9FC0-47C0-8767-4DFAAD1EDBAD} = {146B75D7-33D7-40EF-87B7-D48F3E7B1D98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B170C16-8DB2-48D8-BA30-4F8DAE0DB34B}

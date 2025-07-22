@@ -1,6 +1,8 @@
 ﻿using Auth.Application.Commands;
 using Auth.Domain.Interfaces;
-using Auth.Infrastructure.Mongo;
+using Auth.Infrastructure.Repository;
+using Shared.MongoInfrastructure;
+using Shared.MongoInfrastructure.Interfaces;
 
 namespace APIHost
 {
@@ -8,11 +10,11 @@ namespace APIHost
     {
         public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration config)
         {
-            // Bind Mongo settings
-            services.Configure<MongoSettings>(config.GetSection("MongoSettings"));
 
-            // Mongo context + repository
-            services.AddSingleton<MongoDbContext>();
+            // Shared Mongo configuration
+            services.Configure<MongoSettings>(config.GetSection("MongoSettings"));
+            services.AddSingleton<IMongoDbContext, MongoDbContext>();
+
             services.AddScoped<IUserRepository, UserRepository>();
 
             // MediatR

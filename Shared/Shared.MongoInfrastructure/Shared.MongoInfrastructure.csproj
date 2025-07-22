@@ -7,18 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repository\MongoDbContext.cs" />
-    <Compile Remove="Repository\MongoSettings.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
     <PackageReference Include="MongoDB.Driver" Version="3.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Shared.MongoInfrastructure\Shared.MongoInfrastructure.csproj" />
-    <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
   </ItemGroup>
 
 </Project>

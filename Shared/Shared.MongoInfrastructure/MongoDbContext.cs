@@ -1,15 +1,15 @@
-﻿using Auth.Domain.Entities;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Shared.MongoInfrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auth.Infrastructure.Mongo
+namespace Shared.MongoInfrastructure
 {
-    public class MongoDbContext
+    public class MongoDbContext : IMongoDbContext
     {
         private readonly IMongoDatabase _database;
 
@@ -19,6 +19,7 @@ namespace Auth.Infrastructure.Mongo
             _database = client.GetDatabase(settings.Value.DatabaseName);
         }
 
-        public IMongoCollection<User> Users => _database.GetCollection<User>("users");
+        public IMongoCollection<T> GetCollection<T>(string name) =>
+            _database.GetCollection<T>(name);
     }
 }
