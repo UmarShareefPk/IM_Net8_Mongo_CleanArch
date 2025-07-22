@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Auth.Domain.Entities;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,6 @@ namespace Auth.Infrastructure.Mongo
             _database = client.GetDatabase(settings.Value.DatabaseName);
         }
 
-        public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+        public IMongoCollection<User> Users => _database.GetCollection<User>("users");
     }
 }

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Auth.Infrastructure.Mongo
 {
-    internal class MongoSettings
+    public class MongoSettings
     {
+        public string ConnectionString { get; set; } = null!;
+        public string DatabaseName { get; set; } = null!;
     }
 }

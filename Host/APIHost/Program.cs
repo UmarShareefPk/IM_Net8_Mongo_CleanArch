@@ -1,3 +1,4 @@
+using APIHost;
 using APIHost.Helpers;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 
 // Dynamically load all *.API assemblies
 builder.Services.AddControllersFromBoundedContexts(builder);
+builder.Services.AddAuthServices(builder.Configuration);
 
 // Register Swagger generator
 builder.Services.AddEndpointsApiExplorer();

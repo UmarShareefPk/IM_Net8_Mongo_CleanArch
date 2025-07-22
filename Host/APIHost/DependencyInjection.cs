@@ -1,4 +1,5 @@
-﻿using Auth.Domain.Interfaces;
+﻿using Auth.Application.Commands;
+using Auth.Domain.Interfaces;
 using Auth.Infrastructure.Mongo;
 
 namespace APIHost
@@ -18,7 +19,7 @@ namespace APIHost
             
             services.AddMediatR(cfg =>
             {
-               // cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
             });
 
             return services;
