@@ -16,9 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllersFromBoundedContexts(builder);
 builder.Services.AddAuthServices(builder.Configuration);
 
-// Register Swagger generator
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -26,6 +24,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSwagger();
