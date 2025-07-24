@@ -1,4 +1,4 @@
-﻿using Auth.API.Models;
+﻿
 using Auth.Application.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

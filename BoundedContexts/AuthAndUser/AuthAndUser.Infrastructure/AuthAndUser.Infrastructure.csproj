@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.MongoInfrastructure\Shared.MongoInfrastructure.csproj" />
-    <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\AuthAndUser.Domain\AuthAndUser.Domain.csproj" />
   </ItemGroup>
 
 </Project>

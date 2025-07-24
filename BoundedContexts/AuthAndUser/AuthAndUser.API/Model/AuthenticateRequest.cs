@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace UM.API.Model
+namespace AuthAndUser.API.Model
 {
     public class AuthenticateRequest
     {

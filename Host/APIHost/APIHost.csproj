@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BoundedContexts\Auth\Auth.API\Auth.API.csproj" />
-    <ProjectReference Include="..\..\BoundedContexts\Auth\Auth.Application\Auth.Application.csproj" />
-    <ProjectReference Include="..\..\BoundedContexts\Auth\Auth.Infrastructure\Auth.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.API\AuthAndUser.API.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.Application\AuthAndUser.Application.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.Infrastructure\AuthAndUser.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
