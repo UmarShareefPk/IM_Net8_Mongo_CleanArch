@@ -1,6 +1,6 @@
-﻿using Auth.Application.Commands;
-using Auth.Domain.Entities;
-using Auth.Domain.Interfaces;
+﻿using AuthAndUser.Application.Commands;
+using AuthAndUser.Domain.Entities;
+using AuthAndUser.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auth.Application.Handlers
+namespace AuthAndUser.Application.Handlers
 {
     public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, string>
     {
@@ -20,10 +20,8 @@ namespace Auth.Application.Handlers
         }
 
         public async Task<string> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = new User(request.Email, request.Password);
-            await _userRepository.AddAsync(user);
-            return user.Id;
+        {          
+            return "";
         }
     }
 }

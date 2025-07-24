@@ -1,5 +1,6 @@
-﻿using Auth.Domain.Entities;
-using Auth.Domain.Interfaces;
+﻿using AuthAndUser.Domain.Entities;
+using AuthAndUser.Domain.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Shared.MongoInfrastructure.Interfaces;
 using System;
@@ -23,5 +24,16 @@ namespace Auth.Infrastructure.Repository
         public async Task AddAsync(User user) => await _users.InsertOneAsync(user);
         public async Task<User?> GetByEmailAsync(string email) =>
             await _users.Find(x => x.Email == email).FirstOrDefaultAsync();
+
+        public async Task<User> GetByIdAsync(string id)
+        {
+            //ObjectId.TryParse to validate input
+            if (!ObjectId.TryParse(id, out var objectId))
+                return null;
+
+            return await _users
+                .Find(user => user.Id == objectId.ToString())
+                .FirstOrDefaultAsync();
+        }
     }
 }

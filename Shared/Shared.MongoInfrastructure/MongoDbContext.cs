@@ -13,10 +13,10 @@ namespace Shared.MongoInfrastructure
     {
         private readonly IMongoDatabase _database;
 
-        public MongoDbContext(IOptions<MongoSettings> settings)
+        public MongoDbContext(MongoSettings settings)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            _database = client.GetDatabase(settings.Value.DatabaseName);
+            var client = new MongoClient(settings.ConnectionString);
+            _database = client.GetDatabase(settings.DatabaseName);
         }
 
         public IMongoCollection<T> GetCollection<T>(string name) =>

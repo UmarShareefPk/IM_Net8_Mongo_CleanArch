@@ -6,32 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auth.Domain.Entities
+namespace AuthAndUser.Domain.Entities
 {
     public class User
     {
-        [BsonId]  
-        [BsonRepresentation(BsonType.ObjectId)] // Allows using string instead of ObjectId type
-        public string Id { get; set; } = default!;
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = null!;
 
+        [BsonElement("createDate")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+
+        [BsonElement("firstName")]
+        public string FirstName { get; set; } = null!;
+
+        [BsonElement("lastName")]
+        public string LastName { get; set; } = null!;
+        
+        [BsonElement("profilePic")]
+        public string ProfilePic { get; set; } = string.Empty;
+        
         [BsonElement("email")]
-        public string Email { get; set; } = default!;
-
-        [BsonElement("passwordHash")]
-        public string PasswordHash { get; set; } = default!;
-
-        [BsonElement("createdAt")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public User() { }
-
-        public User(string email, string passwordHash)
-        {
-            Email = email;
-            PasswordHash = passwordHash;
-            CreatedAt = DateTime.UtcNow;
-        }
-
-
+        public string Email { get; set; } = null!;
+        
+        [BsonElement("phone")]
+        public string Phone { get; set; } = string.Empty;
+        public string HubId { get; set; } = null!;
     }
 }

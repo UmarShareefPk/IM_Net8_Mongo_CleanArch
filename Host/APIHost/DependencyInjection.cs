@@ -1,6 +1,8 @@
-﻿using Auth.Application.Commands;
-using Auth.Domain.Interfaces;
-using Auth.Infrastructure.Repository;
+﻿using Auth.Infrastructure.Repository;
+using AuthAndUser.Application.Commands;
+using AuthAndUser.Application.Configuration;
+using AuthAndUser.Application.Security;
+using AuthAndUser.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -14,7 +16,7 @@ namespace APIHost
     {
         public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration config)
         {
-
+            #region Mongo
             // Shared Mongo configuration
             // Build MongoSettings object manually so that sesitive data can be kept in environment variables
             var mongoSettings = new MongoSettings
@@ -29,17 +31,40 @@ namespace APIHost
             services.AddSingleton(mongoSettings);
             services.AddSingleton<IMongoDbContext, MongoDbContext>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
+            #endregion
 
-            // MediatR            
+            #region Repositories and others
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+            #endregion
+
+            #region MediatR
+
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
             });
 
-            //JWT
+            #endregion
+
+            #region JWT
+            
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(config["JwtSecret"]!);
+
+            services.Configure<JwtSettings>(config.GetSection("jwtSettings"));
+
+            // Bind and inject Secret from environment
+            services.PostConfigure<JwtSettings>(options =>
+            {
+                options.Secret = config["JwtSecret"]!;
+            });
+            #endregion
+
+
 
             services.AddAuthentication(options =>
             {
@@ -94,7 +119,7 @@ namespace APIHost
             },
             Array.Empty<string>()
         }
-    });
+                });
             });
 
             return services;
