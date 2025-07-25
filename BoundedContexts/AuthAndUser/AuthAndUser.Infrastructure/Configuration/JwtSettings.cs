@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthAndUser.Application.Configuration
+namespace AuthAndUser.Infrastructure.Configuration
 {
     public class JwtSettings
     {

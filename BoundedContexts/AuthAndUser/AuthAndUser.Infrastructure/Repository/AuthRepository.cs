@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auth.Infrastructure.Repository
+namespace AuthAndUser.Infrastructure.Repository
 {
     public class AuthRepository : IAuthRepository
     {

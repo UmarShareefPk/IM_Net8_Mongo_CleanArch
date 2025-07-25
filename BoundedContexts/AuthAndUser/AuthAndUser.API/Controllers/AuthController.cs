@@ -1,5 +1,4 @@
 ﻿using AuthAndUser.Application.Commands;
-using AuthAndUser.Application.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,38 +14,32 @@ using System.Threading.Tasks;
 
 namespace AuthAndUser.API.Controllers
 {
-   
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet("ping")]
         public IActionResult Ping() => Ok("Auth module is alive");
 
-        private readonly IMediator _mediator;
-        private readonly IConfiguration _config;
+        private readonly IMediator _mediator;  
     
-
         public AuthController(IMediator mediator, IConfiguration config)
         {
-            _mediator = mediator;
-            _config = config;          
+            _mediator = mediator;          
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthenticateCommand authenticateCommand)        
         {
-            // Validate credentials manually or via CQRS handler...
-
             var authenticateResponse = await _mediator.Send(authenticateCommand);
 
             if( authenticateResponse == null)            
                 return Unauthorized();
             
             return Ok(authenticateResponse);
-
-
         }
 
         [HttpPost("register")]

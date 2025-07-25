@@ -1,20 +1,20 @@
 ﻿using AuthAndUser.Application.Commands;
 using AuthAndUser.Application.DTOs;
-using AuthAndUser.Application.Security;
 using AuthAndUser.Domain.Entities;
 using AuthAndUser.Domain.Interfaces;
+using AuthAndUser.Application.Security;
 using MediatR;
 
 
 namespace AuthAndUser.Application.Handlers
 {
-    public class AuthenticateHandler : IRequestHandler<AuthenticateCommand, AuthenticateResponse?>
+    public class AuthenticateCommandHandler : IRequestHandler<AuthenticateCommand, AuthenticateResponse?>
     {
         private readonly IAuthRepository _authRepository;
         private readonly IUserRepository _userRepository;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-        public AuthenticateHandler(IAuthRepository authRepository, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
+        public AuthenticateCommandHandler(IAuthRepository authRepository, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
         {
             _authRepository = authRepository;
             _userRepository = userRepository;

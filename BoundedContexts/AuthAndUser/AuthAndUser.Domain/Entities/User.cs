@@ -32,6 +32,6 @@ namespace AuthAndUser.Domain.Entities
         
         [BsonElement("phone")]
         public string Phone { get; set; } = string.Empty;
-        public string HubId { get; set; } = null!;
+      
     }
 }

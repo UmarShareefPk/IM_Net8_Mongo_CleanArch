@@ -1,5 +1,6 @@
-﻿using AuthAndUser.Application.Configuration;
+﻿using AuthAndUser.Application.Security;
 using AuthAndUser.Domain.Entities;
+using AuthAndUser.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -10,13 +11,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthAndUser.Application.Security
+namespace AuthAndUser.Infrastructure.Security
 {
-    public interface IJwtTokenGenerator
-    {
-        string GenerateToken(User user);
-    }
-
+ 
     public class JwtTokenGenerator : IJwtTokenGenerator
     {
         private readonly JwtSettings _jwtSettings;

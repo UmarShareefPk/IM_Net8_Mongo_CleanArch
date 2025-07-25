@@ -1,8 +1,9 @@
-﻿using Auth.Infrastructure.Repository;
-using AuthAndUser.Application.Commands;
-using AuthAndUser.Application.Configuration;
+﻿using AuthAndUser.Application.Commands;
 using AuthAndUser.Application.Security;
 using AuthAndUser.Domain.Interfaces;
+using AuthAndUser.Infrastructure.Configuration;
+using AuthAndUser.Infrastructure.Repository;
+using AuthAndUser.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -55,7 +56,7 @@ namespace APIHost
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(config["JwtSecret"]!);
 
-            services.Configure<JwtSettings>(config.GetSection("jwtSettings"));
+            services.Configure<JwtSettings>(config.GetSection("Jwt"));
 
             // Bind and inject Secret from environment
             services.PostConfigure<JwtSettings>(options =>

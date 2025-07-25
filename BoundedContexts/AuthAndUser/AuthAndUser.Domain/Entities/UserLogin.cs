@@ -22,8 +22,12 @@ namespace AuthAndUser.Domain.Entities
         [BsonElement("password")]        
         public string Password { get; set; }
 
+        [BsonElement("HubId")]
+        public string HubId { get; set; } = null!;
+
         [BsonElement("createDate")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+
         public DateTime CreateDate { get; set; }
      
     }
