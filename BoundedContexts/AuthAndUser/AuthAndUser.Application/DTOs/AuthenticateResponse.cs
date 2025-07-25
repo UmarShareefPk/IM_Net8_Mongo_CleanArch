@@ -8,8 +8,8 @@ namespace AuthAndUser.Application.DTOs
         public User? user { get; set; }
         public string Username { get; set; }        
         public string Token { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime LastLogin { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+        public DateTime LastLogin { get; set; } = DateTime.UtcNow;
         public int UnreadConversationCount { get; set; } = 0;
     }
 }

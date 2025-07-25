@@ -29,10 +29,8 @@ namespace Auth.Infrastructure.Repository
         }
 
         public async Task<UserLogin> GetByUsernameAndPasswordAsync(string username, string password)
-        {
-            var u = _userloginsCollection.Find(x => x.Username == username && x.Password == password).CountAsync().Result;
-
-            return await _userloginsCollection
+        {          
+              return await _userloginsCollection
                 .AsQueryable()
                 .Where(x => x.Username == username && x.Password == password)
                 .FirstOrDefaultAsync();
