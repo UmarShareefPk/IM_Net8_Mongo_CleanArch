@@ -2,7 +2,7 @@ using AuthAndUser.Application.DTOs;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace AuthAndUser.Application.Commands
+namespace AuthAndUser.Application.Auth.Commands
 {
     public class AuthenticateCommand : IRequest<AuthenticateResponse>
     {

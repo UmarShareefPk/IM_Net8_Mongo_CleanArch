@@ -19,33 +19,27 @@ namespace AuthAndUser.Infrastructure.Repository
         {
             _users = context.GetCollection<User>("users");
         }
-
-
-        public async Task AddAsync(User user) => await _users.InsertOneAsync(user);
-
-        public Task<List<User>> GetAllUsersAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<User>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
+             
 
         public async Task<User?> GetByEmailAsync(string email) =>
             await _users.Find(x => x.Email == email).FirstOrDefaultAsync();
 
-        public async Task<User> GetByIdAsync(string id)
-        {
-            //ObjectId.TryParse to validate input
-            if (!ObjectId.TryParse(id, out var objectId))
-                return null;
+        public async Task<User?> GetByIdAsync(string id) =>
+         await _users.Find(u => u.Id == id).FirstOrDefaultAsync();
 
-            return await _users
-                .Find(user => user.Id == objectId.ToString())
-                .FirstOrDefaultAsync();
-        }
+        public async Task DeleteAsync(string id) =>
+         await _users.DeleteOneAsync(u => u.Id == id);
+
+        public async Task<List<User>> GetAllUsersAsync() =>
+            await _users.Find(_ => true).ToListAsync();
+
+
+        public async Task InsertAsync(User user) =>
+            await _users.InsertOneAsync(user);
+
+
+        public async Task UpdateAsync(User user) =>
+            await _users.ReplaceOneAsync(u => u.Id == user.Id, user);
 
         public async Task<(List<User> users, long recordCount)> GetUsersPageAsync(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
         {
@@ -99,14 +93,6 @@ namespace AuthAndUser.Infrastructure.Repository
             return (users, totalCount);
         }
 
-        public Task RemoveAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(string id, User updatedUser)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

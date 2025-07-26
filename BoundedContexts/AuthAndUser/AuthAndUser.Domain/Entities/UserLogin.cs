@@ -14,7 +14,7 @@ namespace AuthAndUser.Domain.Entities
         public string? Id { get; set; }
 
         [BsonElement("userId")]
-        public string userId { get; set; } = null!;
+        public string UserId { get; set; } = null!;
         
         [BsonElement("username")]
         public string Username { get; set; } = null!;

@@ -1,12 +1,12 @@
-﻿using AuthAndUser.Application.Commands;
-using AuthAndUser.Application.DTOs;
+﻿using AuthAndUser.Application.DTOs;
+using AuthAndUser.Application.Users.Commands;
 using AuthAndUser.Domain.Entities;
 using AuthAndUser.Domain.Interfaces;
 
 using MediatR;
 using Shared.Common;
 
-namespace AuthAndUser.Application.Handlers
+namespace AuthAndUser.Application.Users.Commands.Handlers
 {
     public class GetUsersPageCommandHandler : IRequestHandler<GetUsersPageCommand, PagedResult<User>>
     {

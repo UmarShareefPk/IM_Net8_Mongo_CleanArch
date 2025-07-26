@@ -1,14 +1,7 @@
-﻿using AuthAndUser.Application.Commands;
-using AuthAndUser.Application.Security;
-using AuthAndUser.Domain.Interfaces;
+﻿
+using AuthAndUser.Application.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuthAndUser.Application
 {
@@ -18,7 +11,7 @@ namespace AuthAndUser.Application
         {
             services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly);
             });
             return services;
         }

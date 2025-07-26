@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
     <ProjectReference Include="..\AuthAndUser.Domain\AuthAndUser.Domain.csproj" />
   </ItemGroup>

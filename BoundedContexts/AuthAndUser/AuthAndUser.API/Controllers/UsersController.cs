@@ -1,17 +1,10 @@
-﻿using AuthAndUser.Application.Commands;
+﻿using AuthAndUser.Application.Users.Commands;
+using AuthAndUser.Application.Users.Queries;
 using AuthAndUser.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AuthAndUser.API.Controllers
 {
@@ -38,9 +31,41 @@ namespace AuthAndUser.API.Controllers
         public async Task<IActionResult> GetUsersWithPageAsync(int pageSize = 5, int pageNumber = 1, string sortBy = null!, string sortDirection = "asc", string? search = "")
         {
             var result = await _mediator.Send(new GetUsersPageCommand(pageSize, pageNumber, sortBy, sortDirection, search));
+
+            if (result is null || result.TotalCount == 0)
+                return NotFound("No users found.");
             return Ok(result);
         }
 
-    }
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(CreateUserCommand command)
+        {
+            var userId = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetUser), new { id = userId }, null);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(string id, UpdateUserCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            await _mediator.Send(new DeleteUserCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(string id)
+        {
+            var user = await _mediator.Send(new GetUserByIdQuery { Id = id });
+            return user is not null ? Ok(user) : NotFound();
+        }
+
+    }// end of class
     
 }

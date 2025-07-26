@@ -16,6 +16,8 @@ namespace AuthAndUser.Infrastructure
             services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
             return services;
         }
     }

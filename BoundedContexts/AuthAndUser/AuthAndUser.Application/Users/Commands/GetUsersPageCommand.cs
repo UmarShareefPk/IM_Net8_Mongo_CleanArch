@@ -3,7 +3,7 @@ using AuthAndUser.Domain.Entities;
 using MediatR;
 using Shared.Common;
 
-namespace AuthAndUser.Application.Commands
+namespace AuthAndUser.Application.Users.Commands
 {
     public class GetUsersPageCommand : IRequest<PagedResult<User>>
     {

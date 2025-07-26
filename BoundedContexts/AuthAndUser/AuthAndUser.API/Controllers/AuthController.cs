@@ -1,4 +1,4 @@
-﻿using AuthAndUser.Application.Commands;
+﻿using AuthAndUser.Application.Auth.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,12 +42,36 @@ namespace AuthAndUser.API.Controllers
             return Ok(authenticateResponse);
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand cmd)
+        [HttpPost]
+        public async Task<IActionResult> Create(InsertUserLoginCommand command)
         {
-            var userId = await _mediator.Send(cmd);
-            return Ok(new { UserId = userId });
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(Get), new { id }, id);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, UpdateUserLoginCommand command)
+        {
+            if (id != command.Id) return BadRequest();
+            var result = await _mediator.Send(command);
+            return result ? Ok() : NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await _mediator.Send(new DeleteUserLoginCommand(id));
+            return result ? Ok() : NotFound();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            // Optional: Add query/handler to fetch UserLogin by ID
+            return Ok();
+        }
+
+
     }
     
 }
