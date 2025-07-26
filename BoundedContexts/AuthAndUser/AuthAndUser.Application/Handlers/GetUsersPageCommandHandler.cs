@@ -1,11 +1,14 @@
 ﻿using AuthAndUser.Application.Commands;
+using AuthAndUser.Application.DTOs;
+using AuthAndUser.Domain.Entities;
 using AuthAndUser.Domain.Interfaces;
-using AuthAndUser.Domain.Models;
+
 using MediatR;
+using Shared.Common;
 
 namespace AuthAndUser.Application.Handlers
 {
-    public class GetUsersPageCommandHandler : IRequestHandler<GetUsersPageCommand, UsersWithPage>
+    public class GetUsersPageCommandHandler : IRequestHandler<GetUsersPageCommand, PagedResult<User>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -14,15 +17,16 @@ namespace AuthAndUser.Application.Handlers
             _userRepository = userRepository;
         }
 
-        public async Task<UsersWithPage> Handle(GetUsersPageCommand request, CancellationToken cancellationToken)
-        {
-            return await _userRepository.GetUsersPageAsync(
-                request.PageSize,
-                request.PageNumber,
-                request.SortBy,
-                request.SortDirection,
-                request.Search
-            );
+        public async Task<PagedResult<User>> Handle(GetUsersPageCommand request, CancellationToken cancellationToken)
+        {            
+            var (users, total) =  await _userRepository.GetUsersPageAsync(
+                                            request.PageSize,
+                                            request.PageNumber,
+                                            request.SortBy,
+                                            request.SortDirection,
+                                            request.Search                                           
+                                        );
+            return new PagedResult<User> { TotalCount = total, Items = users };
         }
     }
 }

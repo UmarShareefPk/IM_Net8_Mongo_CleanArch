@@ -1,9 +1,11 @@
-﻿using AuthAndUser.Domain.Models;
+﻿using AuthAndUser.Application.DTOs;
+using AuthAndUser.Domain.Entities;
 using MediatR;
+using Shared.Common;
 
 namespace AuthAndUser.Application.Commands
 {
-    public class GetUsersPageCommand : IRequest<UsersWithPage>
+    public class GetUsersPageCommand : IRequest<PagedResult<User>>
     {
         public int PageSize { get; set; }
         public int PageNumber { get; set; }

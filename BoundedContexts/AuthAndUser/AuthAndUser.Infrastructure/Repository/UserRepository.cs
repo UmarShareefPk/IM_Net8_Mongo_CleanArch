@@ -1,6 +1,5 @@
 ﻿using AuthAndUser.Domain.Entities;
 using AuthAndUser.Domain.Interfaces;
-using AuthAndUser.Domain.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Shared.MongoInfrastructure.Interfaces;
@@ -48,7 +47,7 @@ namespace AuthAndUser.Infrastructure.Repository
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<UsersWithPage> GetUsersPageAsync(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
+        public async Task<(List<User> users, long recordCount)> GetUsersPageAsync(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
         {
             var filterBuilder = Builders<User>.Filter;
             var filter = filterBuilder.Empty;
@@ -96,13 +95,8 @@ namespace AuthAndUser.Infrastructure.Repository
                 .Skip(skip)
                 .Limit(pageSize)
                 .ToListAsync();
-
-            return new UsersWithPage
-            {
-                Users = users,
-                Total_Users = totalCount
-              
-            };
+                       
+            return (users, totalCount);
         }
 
         public Task RemoveAsync(string id)

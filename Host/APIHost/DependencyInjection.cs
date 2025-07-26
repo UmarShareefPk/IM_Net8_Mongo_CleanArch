@@ -1,15 +1,12 @@
-﻿using AuthAndUser.Application.Commands;
-using AuthAndUser.Application.Security;
-using AuthAndUser.Domain.Interfaces;
+﻿
+using AuthAndUser.Infrastructure;
 using AuthAndUser.Infrastructure.Configuration;
-using AuthAndUser.Infrastructure.Repository;
-using AuthAndUser.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Shared.MongoInfrastructure;
-using Shared.MongoInfrastructure.Interfaces;
 using System.Text;
+using AuthAndUser.Application;
 
 namespace APIHost
 {
@@ -17,42 +14,46 @@ namespace APIHost
     {
         public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSharedMongoInfrastructure(config);
+            services.AddAuthInfrastructure(config);
+            services.AddAuthApplication(config);
+
             #region Mongo
-            // Shared Mongo configuration
-            // Build MongoSettings object manually so that sesitive data can be kept in environment variables
-            var mongoSettings = new MongoSettings
-            {
-                ConnectionString = config["MongoConnectionString"]
-                    ?? throw new InvalidOperationException("MongoConnectionString is not configured."),
-                DatabaseName = config["MongoDatabaseName"]
-                    ?? throw new InvalidOperationException("MongoDatabaseName is not configured.")
-            };
+            //// Shared Mongo configuration
+            //// Build MongoSettings object manually so that sesitive data can be kept in environment variables
+            //var mongoSettings = new MongoSettings
+            //{
+            //    ConnectionString = config["MongoConnectionString"]
+            //        ?? throw new InvalidOperationException("MongoConnectionString is not configured."),
+            //    DatabaseName = config["MongoDatabaseName"]
+            //        ?? throw new InvalidOperationException("MongoDatabaseName is not configured.")
+            //};
 
 
-            services.AddSingleton(mongoSettings);
-            services.AddSingleton<IMongoDbContext, MongoDbContext>();
+            //services.AddSingleton(mongoSettings);
+            //services.AddSingleton<IMongoDbContext, MongoDbContext>();
 
-            #endregion
+            //#endregion
 
-            #region Repositories and others
+            //#region Repositories and others
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IAuthRepository, AuthRepository>();
 
-            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+            //services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             #endregion
 
             #region MediatR
 
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
-            });
+            //services.AddMediatR(cfg =>
+            //{
+            //    cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
+            //});
 
             #endregion
 
-            #region JWT
-            
+           
+
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(config["JwtSecret"]!);
 
@@ -63,7 +64,7 @@ namespace APIHost
             {
                 options.Secret = config["JwtSecret"]!;
             });
-            #endregion
+           
 
 
 
