@@ -17,41 +17,6 @@ namespace APIHost
             services.AddSharedMongoInfrastructure(config);
             services.AddAuthInfrastructure(config);
             services.AddAuthApplication(config);
-
-            #region Mongo
-            //// Shared Mongo configuration
-            //// Build MongoSettings object manually so that sesitive data can be kept in environment variables
-            //var mongoSettings = new MongoSettings
-            //{
-            //    ConnectionString = config["MongoConnectionString"]
-            //        ?? throw new InvalidOperationException("MongoConnectionString is not configured."),
-            //    DatabaseName = config["MongoDatabaseName"]
-            //        ?? throw new InvalidOperationException("MongoDatabaseName is not configured.")
-            //};
-
-
-            //services.AddSingleton(mongoSettings);
-            //services.AddSingleton<IMongoDbContext, MongoDbContext>();
-
-            //#endregion
-
-            //#region Repositories and others
-
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IAuthRepository, AuthRepository>();
-
-            //services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
-            #endregion
-
-            #region MediatR
-
-            //services.AddMediatR(cfg =>
-            //{
-            //    cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
-            //});
-
-            #endregion
-
            
 
             var jwtSettings = config.GetSection("Jwt");
