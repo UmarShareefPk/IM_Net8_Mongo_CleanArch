@@ -1,12 +1,13 @@
 ﻿
+using AuthAndUser.Application;
 using AuthAndUser.Infrastructure;
 using AuthAndUser.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Shared.MongoInfrastructure;
 using System.Text;
-using AuthAndUser.Application;
 
 namespace APIHost
 {

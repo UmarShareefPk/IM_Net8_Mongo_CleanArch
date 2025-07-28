@@ -42,6 +42,7 @@ namespace AuthAndUser.API.Controllers
             return Ok(authenticateResponse);
         }
 
+       
         [HttpPost]
         public async Task<IActionResult> Create(InsertUserLoginCommand command)
         {

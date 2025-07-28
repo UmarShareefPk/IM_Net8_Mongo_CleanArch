@@ -28,7 +28,11 @@ namespace AuthAndUser.Application.Users.Commands.Handlers
             user.Email = request.Email;
             user.Phone = request.Phone;
             user.ProfilePic = request.ProfilePic;
+            user.Role = request.Role;
+            user.IsActive = request.IsActive;
+            user.UpdatedAt = DateTime.UtcNow;
 
+            // Update the user in the repository
             await _repository.UpdateAsync(user);
             return Unit.Value;
         }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Shared.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace AuthAndUser.Application.Users.Commands
         public string Email { get; set; } = null!;
         public string Phone { get; set; } = string.Empty;
         public string ProfilePic { get; set; } = string.Empty;
+
+        public UserRole Role { get; set; } = UserRole.Moderator;
+        public bool IsActive { get; set; } = true;       
     }
 
 }

@@ -28,7 +28,10 @@ namespace AuthAndUser.Application.Users.Commands.Handlers
                 Email = request.Email,
                 Phone = request.Phone,
                 ProfilePic = request.ProfilePic,
-                CreateDate = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                IsActive = request.IsActive,
+                Role = request.Role
             };
 
             await _repository.InsertAsync(user);

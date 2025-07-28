@@ -12,6 +12,7 @@ namespace AuthAndUser.Domain.Interfaces
        Task<UserLogin> GetByUsernameAndPasswordAsync(string username, string hasedPassword);
         Task InsertAsync(UserLogin userLogin);
         Task<UserLogin?> GetByIdAsync(string id);
+        Task<UserLogin?> GetByUsernameAsync(string username);
         Task UpdateAsync(UserLogin userLogin);
         Task<bool> DeleteAsync(string id);
         Task<bool> UpdateHubIdAsync(string userId, string hubId);

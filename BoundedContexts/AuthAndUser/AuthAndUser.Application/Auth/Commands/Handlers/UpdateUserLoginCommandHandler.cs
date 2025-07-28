@@ -26,8 +26,8 @@ namespace AuthAndUser.Application.Auth.Commands.Handlers
             if (!string.IsNullOrEmpty(request.Username))
                 userLogin.Username = request.Username;
 
-            if (!string.IsNullOrEmpty(request.Password))
-                userLogin.Password = request.Password;
+            //if (!string.IsNullOrEmpty(request.Password))
+            //    userLogin.Password = request.Password;
 
             await _repository.UpdateAsync(userLogin);
             return true;

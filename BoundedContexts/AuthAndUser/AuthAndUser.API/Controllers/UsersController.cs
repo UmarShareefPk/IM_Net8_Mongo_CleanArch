@@ -1,5 +1,6 @@
 ﻿using AuthAndUser.Application.Users.Commands;
 using AuthAndUser.Application.Users.Queries;
+using AuthAndUser.Domain.Entities;
 using AuthAndUser.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,7 @@ namespace AuthAndUser.API.Controllers
             _userRepository = userRepository;
         }
 
+        
         [HttpGet("GetUsersWithPage")]
         public async Task<IActionResult> GetUsersWithPageAsync(int pageSize = 5, int pageNumber = 1, string sortBy = null!, string sortDirection = "asc", string? search = "")
         {
@@ -41,7 +43,7 @@ namespace AuthAndUser.API.Controllers
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
             var userId = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetUser), new { id = userId }, null);
+            return Ok(userId);
         }
 
         [HttpPut("{id}")]

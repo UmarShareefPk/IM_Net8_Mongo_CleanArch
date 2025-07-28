@@ -24,17 +24,27 @@ namespace AuthAndUser.Application.Auth.Commands.Handlers
 
         public async Task<AuthenticateResponse?> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
-            _passwordHasher.CreateHash(request.Password, out byte[] hash, out byte[] salt);
+              
 
-                var userLogin = await _authRepository.GetByUsernameAndPasswordAsync(request.Username, request.Password);
+                var userLogin = await _authRepository.GetByUsernameAsync(request.Username);
 
             if (userLogin is null)
+                return null;
+
+            var hashBytes = Convert.FromBase64String(userLogin.PasswordHash);
+            var saltBytes = Convert.FromBase64String(userLogin.PasswordSalt);
+
+            var isValid = _passwordHasher.VerifyHash(request.Password, hashBytes, saltBytes);
+
+            if(!isValid)
                 return null;
 
             var user = await _userRepository.GetByIdAsync(userLogin.UserId);
 
             if (user is null)
                 return null;
+
+         
 
             string token = _jwtTokenGenerator.GenerateToken(user);
 
