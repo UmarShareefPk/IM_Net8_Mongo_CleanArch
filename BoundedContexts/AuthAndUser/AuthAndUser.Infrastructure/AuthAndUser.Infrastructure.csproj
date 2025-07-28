@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repository\MongoDbContext.cs" />
-    <Compile Remove="Repository\MongoSettings.cs" />
+    <Compile Remove="Repositories\MongoDbContext.cs" />
+    <Compile Remove="Repositories\MongoSettings.cs" />
   </ItemGroup>
 
   <ItemGroup>

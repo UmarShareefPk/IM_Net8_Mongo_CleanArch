@@ -17,6 +17,9 @@
     <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.API\AuthAndUser.API.csproj" />
     <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.Application\AuthAndUser.Application.csproj" />
     <ProjectReference Include="..\..\BoundedContexts\AuthAndUser\AuthAndUser.Infrastructure\AuthAndUser.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\TaskManagement\TaskManagement.Api\TaskManagement.API.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\TaskManagement\TaskManagement.Application\TaskManagement.Application.csproj" />
+    <ProjectReference Include="..\..\BoundedContexts\TaskManagement\TaskManagement.Infrastructure\TaskManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

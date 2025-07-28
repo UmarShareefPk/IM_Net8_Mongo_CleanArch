@@ -1,7 +1,7 @@
 ﻿using AuthAndUser.Application.Users.Commands;
 using AuthAndUser.Application.Users.Queries;
 using AuthAndUser.Domain.Entities;
-using AuthAndUser.Domain.Interfaces;
+using AuthAndUser.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,12 +1,12 @@
 ﻿using AuthAndUser.Application.Security;
-using AuthAndUser.Domain.Interfaces;
 using AuthAndUser.Infrastructure.Mappings;
-using AuthAndUser.Infrastructure.Repository;
 using AuthAndUser.Infrastructure.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using AuthAndUser.Infrastructure.Repositories;
+using AuthAndUser.Domain.Repositories;
 
 
 namespace AuthAndUser.Infrastructure

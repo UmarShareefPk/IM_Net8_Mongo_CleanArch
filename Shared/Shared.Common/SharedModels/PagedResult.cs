@@ -1,4 +1,4 @@
-﻿namespace Shared.Common
+﻿namespace Shared.Common.SharedModels
 {
     public class PagedResult<T>
     {

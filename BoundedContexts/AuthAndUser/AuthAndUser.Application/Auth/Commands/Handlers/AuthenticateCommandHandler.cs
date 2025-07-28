@@ -1,8 +1,8 @@
 ﻿using AuthAndUser.Application.DTOs;
 using AuthAndUser.Domain.Entities;
-using AuthAndUser.Domain.Interfaces;
 using AuthAndUser.Application.Security;
 using MediatR;
+using AuthAndUser.Domain.Repositories;
 
 
 namespace AuthAndUser.Application.Auth.Commands.Handlers

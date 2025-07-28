@@ -1,7 +1,7 @@
 ﻿using AuthAndUser.Application.DTOs;
 using AuthAndUser.Domain.Entities;
 using MediatR;
-using Shared.Common;
+using Shared.Common.SharedModels;
 
 namespace AuthAndUser.Application.Users.Commands
 {

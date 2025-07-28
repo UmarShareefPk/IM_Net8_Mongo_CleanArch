@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 // Dynamically load all *.API assemblies
 builder.Services.AddControllersFromBoundedContexts(builder);
 
-builder.Services.AddAuthServices(builder.Configuration);
+builder.Services.AddServices(builder.Configuration);
 
 
 

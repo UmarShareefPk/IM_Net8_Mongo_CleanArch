@@ -1,5 +1,5 @@
 ﻿using AuthAndUser.Domain.Entities;
-using AuthAndUser.Domain.Interfaces;
+using AuthAndUser.Domain.Repositories;
 using AuthAndUser.Infrastructure.MongoModels;
 using AutoMapper;
 using MongoDB.Driver;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthAndUser.Infrastructure.Repository
+namespace AuthAndUser.Infrastructure.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
@@ -20,7 +20,7 @@ namespace AuthAndUser.Infrastructure.Repository
 
         public AuthRepository(IMongoDbContext context, IMapper mapper)
         {
-            _userlogins = context.GetCollection<UserLoginDocument>("userlogins");
+            _userlogins = context.GetCollection<UserLoginDocument>("user_logins");
             _mapper = mapper;
         }
 

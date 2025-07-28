@@ -8,17 +8,20 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Shared.MongoInfrastructure;
 using System.Text;
+using TaskManagement.Infrastructure;
+using TaskManagement.Application;
 
 namespace APIHost
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddSharedMongoInfrastructure(config);
             services.AddAuthInfrastructure(config);
             services.AddAuthApplication(config);
-           
+           services.AddTaskManagementInfrastructure(config);
+            services.AddTaskManagementApplication(config);
 
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(config["JwtSecret"]!);

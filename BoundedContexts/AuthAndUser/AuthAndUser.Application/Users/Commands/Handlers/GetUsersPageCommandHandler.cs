@@ -1,10 +1,9 @@
 ﻿using AuthAndUser.Application.DTOs;
 using AuthAndUser.Application.Users.Commands;
 using AuthAndUser.Domain.Entities;
-using AuthAndUser.Domain.Interfaces;
-
+using AuthAndUser.Domain.Repositories;
 using MediatR;
-using Shared.Common;
+using Shared.Common.SharedModels;
 
 namespace AuthAndUser.Application.Users.Commands.Handlers
 {

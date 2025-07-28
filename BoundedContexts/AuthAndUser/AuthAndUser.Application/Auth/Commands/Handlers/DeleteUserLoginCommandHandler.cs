@@ -1,5 +1,5 @@
 ﻿using AuthAndUser.Application.Auth.Commands;
-using AuthAndUser.Domain.Interfaces;
+using AuthAndUser.Domain.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
