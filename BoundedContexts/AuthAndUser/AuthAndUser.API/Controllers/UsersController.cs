@@ -29,10 +29,10 @@ namespace AuthAndUser.API.Controllers
         }
 
         
-        [HttpGet("GetUsersWithPage")]
-        public async Task<IActionResult> GetUsersWithPageAsync(int pageSize = 5, int pageNumber = 1, string sortBy = null!, string sortDirection = "asc", string? search = "")
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(int pageSize = 5, int pageNumber = 1, string sortBy = null!, string sortDirection = "asc", string? search = "")
         {
-            var result = await _mediator.Send(new GetUsersPageCommand(pageSize, pageNumber, sortBy, sortDirection, search));
+            var result = await _mediator.Send(new GetUsersPageQuery(pageSize, pageNumber, sortBy, sortDirection, search));
 
             if (result is null || result.TotalCount == 0)
                 return NotFound("No users found.");

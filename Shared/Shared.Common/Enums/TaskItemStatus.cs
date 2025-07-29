@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,13 +10,16 @@ namespace Shared.Common.Enums
 {
     public enum TaskItemStatus
     {
-        [Description("New")]
+        [EnumMember(Value = "new")]
         New,
-        [Description("InProgress")]
+
+        [EnumMember(Value = "in_progress")]
         InProgress,
-        [Description("Late")]
+
+        [EnumMember(Value = "late")]
         Late,
-        [Description("Closed")]
+
+        [EnumMember(Value = "closed")]
         Closed
     }
 }

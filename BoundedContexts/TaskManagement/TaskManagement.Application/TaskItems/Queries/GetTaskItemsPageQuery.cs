@@ -1,11 +1,11 @@
-﻿using AuthAndUser.Application.DTOs;
-using AuthAndUser.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Shared.Common.SharedModels;
+using TaskManagement.Application.DTOs;
+using TaskManagement.Domain.Entities;
 
-namespace AuthAndUser.Application.Users.Commands
+namespace TaskManagement.Application.TaskItems.Queries
 {
-    public class GetUsersPageCommand : IRequest<PagedResult<User>>
+    public class GetTaskItemsPageQuery : IRequest<PagedResult<TaskItemDto>>
     {
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
@@ -13,7 +13,7 @@ namespace AuthAndUser.Application.Users.Commands
         public string? SortDirection { get; set; }
         public string? Search { get; set; }
 
-        public GetUsersPageCommand(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
+        public GetTaskItemsPageQuery(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
         {
             PageSize = pageSize;
             PageNumber = pageNumber;

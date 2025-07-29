@@ -1,6 +1,9 @@
 using APIHost;
 using APIHost.Helpers;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Add Controllers from other assemblies
-//builder.Services.AddControllers()
-//    .PartManager.ApplicationParts.Add(new AssemblyPart(typeof(Auth.API.Controllers.UserController).Assembly));
+BsonSerializer.RegisterSerializer(new EnumSerializer<TaskStatus>(BsonType.String));
 
 // Dynamically load all *.API assemblies
 builder.Services.AddControllersFromBoundedContexts(builder);

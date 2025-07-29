@@ -31,9 +31,11 @@ namespace TaskManagement.Infrastructure.MongoModels
         public TaskItemPriority Priority { get; set; }
 
         [BsonElement("createdby")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string CreatedBy { get; set; }
 
         [BsonElement("assignedto")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string? AssignedTo { get; set; }
 
         [BsonElement("duedate")]

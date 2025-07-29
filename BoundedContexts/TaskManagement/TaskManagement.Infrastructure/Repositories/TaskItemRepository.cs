@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Shared.MongoInfrastructure.Interfaces;
 using System;
@@ -58,6 +59,59 @@ namespace TaskManagement.Infrastructure.Repositories
             await _collection.DeleteOneAsync(x => x.Id == id, cancellationToken);
         }
 
+        public async Task<(List<TaskItem> taskItems, long recordCount)> GetTaskItemsPageAsync(
+    int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
+        {
+            var filterBuilder = Builders<TaskItemDocument>.Filter;
+            var filter = filterBuilder.Empty;
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                filter = Builders<TaskItemDocument>.Filter.Or(
+                    Builders<TaskItemDocument>.Filter.Regex(t => t.Title, new BsonRegularExpression(search, "i")),
+                    Builders<TaskItemDocument>.Filter.Regex(t => t.Description, new BsonRegularExpression(search, "i"))
+                );
+            }
+
+            var totalCount = await _collection.CountDocumentsAsync(filter);
+
+            var sortDefinition = Builders<TaskItemDocument>.Sort.Descending(t => t.CreatedAt);
+
+            if (!string.IsNullOrWhiteSpace(sortBy))
+            {
+                var ascending = sortDirection?.ToLower() == "asc";
+
+                sortDefinition = sortBy.ToLower() switch
+                {
+                    "title" => ascending
+                        ? Builders<TaskItemDocument>.Sort.Ascending(t => t.Title)
+                        : Builders<TaskItemDocument>.Sort.Descending(t => t.Title),
+
+                    "priority" => ascending
+                        ? Builders<TaskItemDocument>.Sort.Ascending(t => t.Priority)
+                        : Builders<TaskItemDocument>.Sort.Descending(t => t.Priority),
+
+                    "duedate" => ascending
+                        ? Builders<TaskItemDocument>.Sort.Ascending(t => t.DueDate)
+                        : Builders<TaskItemDocument>.Sort.Descending(t => t.DueDate),
+
+                    _ => sortDefinition
+                };
+            }
+
+            var skip = (pageNumber - 1) * pageSize;
+
+            var docs = await _collection
+                .Find(filter)
+                .Sort(sortDefinition)
+                .Skip(skip)
+                .Limit(pageSize)
+                .ToListAsync();
+
+            var taskItems = _mapper.Map<List<TaskItem>>(docs);
+
+            return (taskItems, totalCount);
+        }
     }// end of TaskItemRepository class
 
 }

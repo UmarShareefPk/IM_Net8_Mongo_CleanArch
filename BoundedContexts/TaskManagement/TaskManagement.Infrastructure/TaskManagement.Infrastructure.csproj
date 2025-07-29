@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.MongoInfrastructure\Shared.MongoInfrastructure.csproj" />
+    <ProjectReference Include="..\TaskManagement.Application\TaskManagement.Application.csproj" />
     <ProjectReference Include="..\TaskManagement.Domain\TaskManagement.Domain.csproj" />
   </ItemGroup>
 
