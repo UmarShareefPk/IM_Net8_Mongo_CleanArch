@@ -1,6 +1,6 @@
-# TaskHub — Task & Incident Management System
+# TaskForge — Task & Incident Management System
 
-TaskHub is a modern, full-stack task and incident management system built using **.NET 8**, **Angular**, and **MongoDB** following **Clean Architecture** principles with **Bounded Contexts**.
+TaskForge is a modern, full-stack task and incident management system built using **.NET 8**, **Angular**, and **MongoDB** following **Clean Architecture** principles with **Bounded Contexts**.
 
 It provides a scalable and extensible foundation for real-world enterprise apps with role-based access control, task lifecycle management, live messaging, and detailed activity tracking.
 
