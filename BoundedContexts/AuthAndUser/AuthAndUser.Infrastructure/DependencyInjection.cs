@@ -19,26 +19,7 @@ namespace AuthAndUser.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
-
-           services.AddSingleton(provider =>
-            {
-                var configExpr = new MapperConfigurationExpression();
-                configExpr.AddProfile<MappingProfile>();
-
-                var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                return new MapperConfiguration(configExpr, loggerFactory);
-            });
-
-            services.AddSingleton<IMapper>(sp =>
-            {
-                var config = sp.GetRequiredService<MapperConfiguration>();
-                return new Mapper(config);
-            });
-
-
-
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
-
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             return services;
         }

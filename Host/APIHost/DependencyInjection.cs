@@ -10,6 +10,7 @@ using Shared.MongoInfrastructure;
 using System.Text;
 using TaskManagement.Infrastructure;
 using TaskManagement.Application;
+using AutoMapper;
 
 namespace APIHost
 {
@@ -23,6 +24,21 @@ namespace APIHost
            services.AddTaskManagementInfrastructure(config);
             services.AddTaskManagementApplication(config);
 
+            services.AddSingleton(provider =>
+             {
+                 var configExpr = new MapperConfigurationExpression();
+                 configExpr.AddProfile<AuthAndUser.Infrastructure.Mappings.MappingProfile>();
+                 configExpr.AddProfile<TaskManagement.Infrastructure.Mappings.MappingProfile>();
+                 var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+                 return new MapperConfiguration(configExpr, loggerFactory);
+             });
+
+            services.AddSingleton<IMapper>(sp =>
+            {
+                var config = sp.GetRequiredService<MapperConfiguration>();
+                return new Mapper(config);
+            });
+
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(config["JwtSecret"]!);
 
@@ -33,9 +49,31 @@ namespace APIHost
             {
                 options.Secret = config["JwtSecret"]!;
             });
-           
 
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        //.AllowAnyOrigin()
+                        .WithOrigins(
+                            "https://localhost:44338",
+                            "http://localhost:3000",
+                            "http://localhost:4200",
+                            "https://lively-bush-0d9b77d10.1.azurestaticapps.net",
+                            "http://localhost/ImAngular",
+                            "https://calm-mud-02aada210.1.azurestaticapps.net",
+                            "https://localhost:7135",
+                            "https://salmon-bay-0ee5f3310.1.azurestaticapps.net",
+                            "https://immvc6.azurewebsites.net",
+                            "https://incidentbyid.azurewebsites.net",
+                            "https://green-coast-003a53010.1.azurestaticapps.net"
+                            )
+                        .AllowCredentials();
+                });
+            });
 
             services.AddAuthentication(options =>
             {

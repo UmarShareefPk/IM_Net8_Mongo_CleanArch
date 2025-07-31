@@ -29,6 +29,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors("ClientPermission");
+
 app.UseSwagger();
 app.UseSwaggerUI(); // You can add options here for grouping, etc.
 
