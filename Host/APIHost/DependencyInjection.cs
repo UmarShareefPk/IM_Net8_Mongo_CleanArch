@@ -21,7 +21,7 @@ namespace APIHost
             services.AddSharedMongoInfrastructure(config);
             services.AddAuthInfrastructure(config);
             services.AddAuthApplication(config);
-           services.AddTaskManagementInfrastructure(config);
+           services.AddTaskManagementInfrastructure(config); 
             services.AddTaskManagementApplication(config);
 
             services.AddSingleton(provider =>
