@@ -11,6 +11,7 @@ namespace AuthAndUser.Infrastructure.Mappings
         {
             CreateMap<User, UserDocument>().ReverseMap();
             CreateMap<UserLogin, UserLoginDocument>().ReverseMap();
+            CreateMap<Team, TeamDocument>().ReverseMap();
         }
     }
 }

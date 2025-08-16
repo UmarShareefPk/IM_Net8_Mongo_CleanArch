@@ -31,7 +31,8 @@ namespace AuthAndUser.Application.Users.Commands.Handlers
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 IsActive = request.IsActive,
-                Role = request.Role
+                Role = request.Role,
+                teamId = request.TeamId
             };
 
             await _repository.InsertAsync(user);

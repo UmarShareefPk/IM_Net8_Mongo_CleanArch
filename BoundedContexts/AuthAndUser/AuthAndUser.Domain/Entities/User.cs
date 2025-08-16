@@ -15,6 +15,7 @@ namespace AuthAndUser.Domain.Entities
         public UserRole Role { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public string teamId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 

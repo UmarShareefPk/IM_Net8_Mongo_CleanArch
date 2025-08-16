@@ -14,7 +14,8 @@ namespace AuthAndUser.Application.Users.Commands
 
         public UserRole Role { get; set; } = UserRole.Moderator;
         public bool IsActive { get; set; } = true;
-     
+        public string TeamId { get; set; } = string.Empty;
+
     }
 
 }

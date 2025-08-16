@@ -35,6 +35,9 @@ namespace AuthAndUser.Infrastructure.MongoModels
         [BsonElement("isActive")]
         public bool IsActive { get; set; }
 
+        [BsonElement("teamId")]
+        public string TeamId { get; set; } = null!;
+
         [BsonElement("createdAt")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
