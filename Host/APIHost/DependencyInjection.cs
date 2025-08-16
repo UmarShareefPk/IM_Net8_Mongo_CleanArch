@@ -94,7 +94,7 @@ namespace APIHost
                     IssuerSigningKey = new SymmetricSecurityKey(key),
 
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.FromMinutes(double.Parse(jwtSettings["ExpiryMinutes"]!))
                 };
             });
 

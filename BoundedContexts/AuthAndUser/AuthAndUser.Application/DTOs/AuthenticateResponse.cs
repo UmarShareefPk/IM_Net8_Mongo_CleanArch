@@ -6,6 +6,8 @@ namespace AuthAndUser.Application.DTOs
     {
         public string Id { get; set; }
         public User? user { get; set; }
+        public Team? Team { get; set; }
+        public List<User> TeamUsers { get; set; } = new List<User>();
         public string Username { get; set; }        
         public string Token { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;

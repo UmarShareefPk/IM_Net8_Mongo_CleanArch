@@ -15,7 +15,7 @@ namespace TaskManagement.Infrastructure.Repositories
 {
     public class TaskItemRepository : ITaskItemRepository
     {
-        private readonly IMongoCollection<TaskItemDocument> _collection;
+        private readonly IMongoCollection<TaskItemDocument> _collection;     
         private readonly IMapper _mapper;
 
         public TaskItemRepository(IMongoDbContext context, IMapper mapper)
@@ -112,6 +112,10 @@ namespace TaskManagement.Infrastructure.Repositories
 
             return (taskItems, totalCount);
         }
+
+
+
+
     }// end of TaskItemRepository class
 
 }

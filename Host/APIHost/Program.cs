@@ -26,10 +26,12 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseCors("ClientPermission");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("ClientPermission");
+
 
 app.UseSwagger();
 app.UseSwaggerUI(); // You can add options here for grouping, etc.

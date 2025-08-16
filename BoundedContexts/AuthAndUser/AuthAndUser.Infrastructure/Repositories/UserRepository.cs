@@ -111,6 +111,10 @@ namespace AuthAndUser.Infrastructure.Repositories
             return (users, totalCount);
         }
 
-
+        public async Task<List<User>> GetAllTeamUsersAsync(string teamId)
+        {
+            var docs = await _users.Find(u => u.TeamId == teamId).ToListAsync();
+            return _mapper.Map<List<User>>(docs);
+        }
     }
 }

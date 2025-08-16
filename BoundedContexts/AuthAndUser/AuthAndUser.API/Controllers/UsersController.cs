@@ -68,6 +68,14 @@ namespace AuthAndUser.API.Controllers
             return user is not null ? Ok(user) : NotFound();
         }
 
+
+        [HttpGet("getAllTeamUsers")]
+        public async Task<IActionResult> GetAllTeamUser(string teamId)
+        {
+            var users = await _mediator.Send(new GetAllTeamUsersQuery { TeamId = teamId });
+            return users is not null ? Ok(users) : NotFound();
+        }
+
     }// end of class
     
 }

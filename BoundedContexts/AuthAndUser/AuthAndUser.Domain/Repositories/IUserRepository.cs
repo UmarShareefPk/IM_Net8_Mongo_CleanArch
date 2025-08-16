@@ -17,6 +17,7 @@ namespace AuthAndUser.Domain.Repositories
         Task<User?> GetByEmailAsync(string email);   
     
         Task<List<User>> GetAllUsersAsync();
+        Task<List<User>> GetAllTeamUsersAsync(string teamId);
         Task<(List<User> users, long recordCount) > GetUsersPageAsync(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search);
        
 

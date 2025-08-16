@@ -13,13 +13,16 @@ namespace AuthAndUser.Application.Auth.Commands.Handlers
         private readonly IUserRepository _userRepository;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly ITeamRepository _teamRepository;
 
-        public AuthenticateCommandHandler(IAuthRepository authRepository, IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator, IPasswordHasher passwordHasher)
+        public AuthenticateCommandHandler(IAuthRepository authRepository, IUserRepository userRepository, ITeamRepository teamRepository, IJwtTokenGenerator jwtTokenGenerator, 
+            IPasswordHasher passwordHasher)
         {
             _authRepository = authRepository;
             _userRepository = userRepository;
             _jwtTokenGenerator = jwtTokenGenerator;
             _passwordHasher = passwordHasher;
+            _teamRepository = teamRepository;
         }
 
         public async Task<AuthenticateResponse?> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
@@ -47,12 +50,16 @@ namespace AuthAndUser.Application.Auth.Commands.Handlers
          
 
             string token = _jwtTokenGenerator.GenerateToken(user);
+            Team team = await _teamRepository.GetByIdAsync(user.teamId);
+            List<User> teamUsers = await _userRepository.GetAllTeamUsersAsync(user.teamId);
 
             return new AuthenticateResponse
             {
-                Id = userLogin.Id,
+                Id = userLogin.UserId,
                 Username = userLogin.Username,              
                 user = user,
+                Team = team,
+                TeamUsers = teamUsers,
                 Token = token,
 
             };

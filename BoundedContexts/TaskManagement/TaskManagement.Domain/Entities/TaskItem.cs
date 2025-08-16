@@ -18,6 +18,7 @@ namespace TaskManagement.Domain.Entities
         public TaskItemPriority Priority { get; set; }
         public string CreatedBy { get; set; }
         public string? AssignedTo { get; set; }
+        public string? TeamId { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

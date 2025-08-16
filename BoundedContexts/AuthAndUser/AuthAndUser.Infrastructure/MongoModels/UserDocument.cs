@@ -35,6 +35,7 @@ namespace AuthAndUser.Infrastructure.MongoModels
         [BsonElement("isActive")]
         public bool IsActive { get; set; }
 
+        [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("teamId")]
         public string TeamId { get; set; } = null!;
 

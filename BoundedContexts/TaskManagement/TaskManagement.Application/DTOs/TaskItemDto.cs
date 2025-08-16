@@ -15,6 +15,7 @@ namespace TaskManagement.Application.DTOs
         public string Priority { get; set; }     // <- string
         public string CreatedBy { get; set; }
         public string AssignedTo { get; set; }
+        public string TeamId { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

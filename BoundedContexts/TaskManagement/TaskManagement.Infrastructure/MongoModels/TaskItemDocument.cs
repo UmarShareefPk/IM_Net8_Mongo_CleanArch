@@ -38,6 +38,10 @@ namespace TaskManagement.Infrastructure.MongoModels
         [BsonRepresentation(BsonType.ObjectId)]
         public string? AssignedTo { get; set; }
 
+        [BsonElement("teamId")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? TeamId { get; set; }
+
         [BsonElement("duedate")]
         public DateTime? DueDate { get; set; }
 
