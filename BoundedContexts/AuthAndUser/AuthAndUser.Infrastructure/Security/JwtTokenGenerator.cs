@@ -31,8 +31,8 @@ namespace AuthAndUser.Infrastructure.Security
             {
                 new Claim("UserId", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("FirstNmae", user.FirstName),
-                new Claim("LastName", user.LastName)
+                new Claim("TeamId", user.teamId),
+                new Claim("Role", user.Role.ToString())
             };
 
             var token = new JwtSecurityToken(_jwtSettings.Issuer,

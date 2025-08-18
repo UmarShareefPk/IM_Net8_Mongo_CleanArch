@@ -6,7 +6,6 @@ using TaskManagement.Application.TaskItems.Queries;
 using TaskManagement.Domain.Entities;
 
 
-
 namespace TaskManagement.API.Controllers
 {
     [ApiController]
@@ -57,7 +56,9 @@ namespace TaskManagement.API.Controllers
        [FromQuery] string? sortDirection,
        [FromQuery] string? search)
         {
-            var query = new GetTaskItemsPageQuery(pageSize, pageNumber, sortBy, sortDirection, search);
+            var teamId = User.FindFirst("TeamId")?.Value;
+         
+            var query = new GetTaskItemsPageQuery(pageSize, pageNumber, sortBy, sortDirection, search, teamId);
             var result = await _mediator.Send(query);
 
             return Ok(result);

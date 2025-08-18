@@ -12,14 +12,16 @@ namespace TaskManagement.Application.TaskItems.Queries
         public string? SortBy { get; set; }
         public string? SortDirection { get; set; }
         public string? Search { get; set; }
+        public string TeamId { get; set; } = string.Empty;
 
-        public GetTaskItemsPageQuery(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
+        public GetTaskItemsPageQuery(int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search, string teamId)
         {
             PageSize = pageSize;
             PageNumber = pageNumber;
             SortBy = sortBy;
             SortDirection = sortDirection;
             Search = search;
+            TeamId = teamId;
         }
     }
 }

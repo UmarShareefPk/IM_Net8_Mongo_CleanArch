@@ -15,6 +15,6 @@ namespace TaskManagement.Domain.Repositories
         Task UpdateAsync(TaskItem task, CancellationToken cancellationToken = default);
         Task DeleteAsync(string id, CancellationToken cancellationToken = default);
         Task<(List<TaskItem> taskItems, long recordCount)> GetTaskItemsPageAsync(
-            int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search);
+            int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search, string teamId);
     }
 }

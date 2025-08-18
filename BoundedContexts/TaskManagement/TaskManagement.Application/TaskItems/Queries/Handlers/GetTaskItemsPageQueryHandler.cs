@@ -26,7 +26,7 @@ namespace TaskManagement.Application.TaskItems.Queries.Handlers
                 request.PageNumber,
                 request.SortBy,
                 request.SortDirection,
-                request.Search);
+                request.Search, request.TeamId);
 
             var taskItemDtos = _mapper.Map<List<TaskItemDto>>(items);
         return new PagedResult<TaskItemDto> { TotalCount = total, Items = taskItemDtos };

@@ -60,7 +60,7 @@ namespace TaskManagement.Infrastructure.Repositories
         }
 
         public async Task<(List<TaskItem> taskItems, long recordCount)> GetTaskItemsPageAsync(
-    int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search)
+    int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search, string teamId)
         {
             var filterBuilder = Builders<TaskItemDocument>.Filter;
             var filter = filterBuilder.Empty;
@@ -73,6 +73,10 @@ namespace TaskManagement.Infrastructure.Repositories
                 );
             }
 
+            filter = Builders<TaskItemDocument>.Filter.And(
+                filter,
+                Builders<TaskItemDocument>.Filter.Eq(t => t.TeamId, teamId)
+            );
             var totalCount = await _collection.CountDocumentsAsync(filter);
 
             var sortDefinition = Builders<TaskItemDocument>.Sort.Descending(t => t.CreatedAt);
