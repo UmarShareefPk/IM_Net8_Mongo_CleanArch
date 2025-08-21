@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Shared.Common.Enums;
 using Shared.MongoInfrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -60,25 +61,64 @@ namespace TaskManagement.Infrastructure.Repositories
         }
 
         public async Task<(List<TaskItem> taskItems, long recordCount)> GetTaskItemsPageAsync(
-    int pageSize, int pageNumber, string? sortBy, string? sortDirection, string? search, string teamId)
+     int pageSize,
+     int pageNumber,
+     string? sortBy,
+     string? sortDirection,
+     string? search,
+     string? status,
+     string? userId,
+     string? fromDate,
+     string? toDate,
+     string teamId)
         {
             var filterBuilder = Builders<TaskItemDocument>.Filter;
-            var filter = filterBuilder.Empty;
+            var filters = new List<FilterDefinition<TaskItemDocument>>();
 
+            // Base: team filter
+            filters.Add(filterBuilder.Eq(t => t.TeamId, teamId));
+
+            // Search filter
             if (!string.IsNullOrWhiteSpace(search))
             {
-                filter = Builders<TaskItemDocument>.Filter.Or(
-                    Builders<TaskItemDocument>.Filter.Regex(t => t.Title, new BsonRegularExpression(search, "i")),
-                    Builders<TaskItemDocument>.Filter.Regex(t => t.Description, new BsonRegularExpression(search, "i"))
-                );
+                filters.Add(filterBuilder.Or(
+                    filterBuilder.Regex(t => t.Title, new BsonRegularExpression(search, "i")),
+                    filterBuilder.Regex(t => t.Description, new BsonRegularExpression(search, "i"))
+                ));
             }
 
-            filter = Builders<TaskItemDocument>.Filter.And(
-                filter,
-                Builders<TaskItemDocument>.Filter.Eq(t => t.TeamId, teamId)
-            );
+            // Status filter
+            if (!string.IsNullOrWhiteSpace(status) &&
+             Enum.TryParse<TaskItemStatus>(status, true, out var parsedStatus))
+            {
+                filters.Add(filterBuilder.Eq(t => t.Status, parsedStatus));
+            }
+
+            // User filter
+            if (!string.IsNullOrWhiteSpace(userId))
+            {
+                filters.Add(filterBuilder.Eq(t => t.AssignedTo, userId));
+               
+            }
+
+            // Date range filter
+            if (DateTime.TryParse(fromDate, out var fromDt))
+            {
+                filters.Add(filterBuilder.Gte(t => t.CreatedAt, fromDt));
+            }
+
+            if (DateTime.TryParse(toDate, out var toDt))
+            {
+                filters.Add(filterBuilder.Lte(t => t.CreatedAt, toDt));
+            }
+
+            // Combine filters
+            var filter = filterBuilder.And(filters);
+
+            // Count total
             var totalCount = await _collection.CountDocumentsAsync(filter);
 
+            // Sorting
             var sortDefinition = Builders<TaskItemDocument>.Sort.Descending(t => t.CreatedAt);
 
             if (!string.IsNullOrWhiteSpace(sortBy))
@@ -105,6 +145,7 @@ namespace TaskManagement.Infrastructure.Repositories
 
             var skip = (pageNumber - 1) * pageSize;
 
+            // Query documents
             var docs = await _collection
                 .Find(filter)
                 .Sort(sortDefinition)

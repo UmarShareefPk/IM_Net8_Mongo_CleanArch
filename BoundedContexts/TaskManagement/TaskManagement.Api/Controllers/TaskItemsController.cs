@@ -54,11 +54,19 @@ namespace TaskManagement.API.Controllers
        [FromQuery] int pageNumber,
        [FromQuery] string? sortBy,
        [FromQuery] string? sortDirection,
-       [FromQuery] string? search)
+       [FromQuery] string? search,
+       [FromQuery] string? status,
+       [FromQuery] string? userId,
+       [FromQuery] string? fromDate,
+       [FromQuery] string? toDate
+
+            )
+
         {
             var teamId = User.FindFirst("TeamId")?.Value;
          
-            var query = new GetTaskItemsPageQuery(pageSize, pageNumber, sortBy, sortDirection, search, teamId);
+            var query = new GetTaskItemsPageQuery(pageSize, pageNumber, sortBy, sortDirection, search, status, userId
+                , fromDate, toDate, teamId);
             var result = await _mediator.Send(query);
 
             return Ok(result);
